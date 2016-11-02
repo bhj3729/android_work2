@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View v) { //button onclick걸기
         //sd card사용 가능 여부 확인
-        if(isStoragePermissionGranted()){
+        if(isStoragePermissionGranted()==false){
             Toast.makeText(getApplicationContext(),
                      "SD card 사용불가", Toast.LENGTH_SHORT).show();
             return;
@@ -40,15 +40,20 @@ public class MainActivity extends AppCompatActivity {
         switch (v.getId()) {
             //폴더 생성
             case R.id.button:
-                //디렉토리 만든는 함수.
+                //디렉토리 만드는 함수.
                 myfolder.mkdir();
+
                 Toast.makeText(getApplicationContext(),
                         "폴더 생성", Toast.LENGTH_SHORT).show();
                 break;
 
             //폴더 삭제
             case R.id.button2:
+                //디렉토리 삭제 함수
+                myfolder.delete();
 
+                Toast.makeText(getApplicationContext(),
+                        "폴더 삭제", Toast.LENGTH_SHORT).show();
                 break;
             //파일 생성
             case R.id.button3:
@@ -64,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     String TAG = "TEST";
+
     public  boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
