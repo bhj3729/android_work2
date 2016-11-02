@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,9 +58,26 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "폴더 삭제", Toast.LENGTH_SHORT).show();
                 break;
+
+
             //파일 생성
             case R.id.button3:
+                try{
+                    FileOutputStream fos = new FileOutputStream(filename);
+                    String str = "Hello";
+                    fos.write(str.getBytes());
+                    fos.close();
+
+                    Toast.makeText(getApplicationContext(),
+                            "파일생성", Toast.LENGTH_SHORT).show();
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
+
             //파일 읽기;
             case R.id.button4:
                 break;
