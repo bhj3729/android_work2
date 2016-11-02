@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
@@ -20,10 +21,14 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    EditText e1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        e1 = (EditText) findViewById(R.id.editText);
     }
 
     public void onClick(View v) { //button onclick걸기
@@ -96,8 +101,20 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 break;
+
+
             //파일 목록 가져오기
             case R.id.button5:
+                File filelist[] = new File(path).listFiles();
+                String str = "";
+                for (int i=0; i<filelist.length; i++){
+                    if(filelist[i].isDirectory())
+                        str += "<폴더>" + filelist[i].toString() + "\n";
+                    else
+                        str += "<폴더>" + filelist[i].toString() + "\n";
+                }
+                e1.setText(str); //get=가져오는거 set=변경하는거
+
                 break;
         }
     }
